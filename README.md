@@ -1,4 +1,7 @@
-Para executar a aplicação:
+Pré-requisitos:
+- JDK 8+
+
+Para executar a aplicação execute o comando:
 ```
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
