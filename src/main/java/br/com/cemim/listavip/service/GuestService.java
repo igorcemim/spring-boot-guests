@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -29,19 +27,19 @@ public class GuestService {
         return repository.findAll();
     }
 
-    public Guest get(@PathVariable Long id) {
+    public Guest get(Long id) {
         Guest guest = repository.findById(id).orElse(null);
         logger.info("Got " + guest);
         return guest;
     }
 
-    public Guest save(@RequestBody Guest guest) {
+    public Guest save(Guest guest) {
         repository.save(guest);
         logger.info("Saved " + guest);
         return guest;
     }
 
-    public void delete(@PathVariable Long id) {
+    public void delete(Long id) {
         repository.deleteById(id);
         logger.info("Deleted Guest of id " + id);
     }
