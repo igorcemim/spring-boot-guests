@@ -31,13 +31,13 @@ public class GuestService {
 
     public Guest get(@PathVariable Long id) {
         Guest guest = repository.findById(id).orElse(null);
-        logger.info("Got " + guest.toString());
+        logger.info("Got " + guest);
         return guest;
     }
 
     public Guest save(@RequestBody Guest guest) {
         repository.save(guest);
-        logger.info("Saved " + guest.toString());
+        logger.info("Saved " + guest);
         return guest;
     }
 
