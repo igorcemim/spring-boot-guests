@@ -1,28 +1,23 @@
 package br.com.cemim.listavip.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity(name="guest")
+@Entity(name="contact")
 @ToString @Getter @Setter
-public class Guest {
+public class Contact {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String name;
+    private String type;
 
-    @OneToMany(targetEntity = Contact.class, cascade={CascadeType.ALL})
-    private List<Contact> contacts;
+    private String data;
 
 }

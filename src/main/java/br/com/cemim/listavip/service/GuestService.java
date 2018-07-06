@@ -1,6 +1,6 @@
 package br.com.cemim.listavip.service;
 
-import br.com.cemim.listavip.AppConfig;
+import br.com.cemim.listavip.exception.ResourceNotFoundException;
 import br.com.cemim.listavip.model.Guest;
 import br.com.cemim.listavip.repository.GuestRepository;
 
@@ -20,28 +20,36 @@ public class GuestService {
     @Autowired
     private GuestRepository repository;
 
-    @Autowired
-    private AppConfig app;
-
     public List<Guest> list() {
         return repository.findAll();
     }
 
     public Guest get(Long id) {
-        Guest guest = repository.findById(id).orElse(null);
+        Guest guest = repository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException());
         logger.info("Got " + guest);
         return guest;
     }
 
-    public Guest save(Guest guest) {
+    public Guest create(Guest guest) {
         repository.save(guest);
-        logger.info("Saved " + guest);
+        logger.info("Created " + guest);
+        return guest;
+    }
+
+    public Guest update(Long id, Guest guest) {
+        guest = repository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException());
+        repository.save(guest);
+        logger.info("Updated " + guest);
         return guest;
     }
 
     public void delete(Long id) {
-        repository.deleteById(id);
-        logger.info("Deleted Guest of id " + id);
+        Guest guest = repository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException());
+        repository.delete(guest);
+        logger.info("Deleted " + guest);
     }
 
 }

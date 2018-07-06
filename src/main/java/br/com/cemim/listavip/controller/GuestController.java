@@ -18,20 +18,31 @@ public class GuestController {
     @Autowired
     private GuestService service;
 
+    @RequestMapping(path = "/test", method = RequestMethod.GET)
+    public List<Guest> lista() {
+        return service.list();
+    }
+
     @RequestMapping(path = "/guests", method = RequestMethod.GET)
     public List<Guest> list() {
         return service.list();
     }
 
+    @RequestMapping(path = "/guests", method = RequestMethod.POST)
+    public Guest create(@RequestBody Guest guest) {
+        service.create(guest);
+        return guest;
+    }
+
+    @RequestMapping(path = "/guests/{id}", method = RequestMethod.PUT)
+    public Guest update(@PathVariable Long id, @RequestBody Guest guest) {
+        service.update(id, guest);
+        return guest;
+    }
+
     @RequestMapping(path = "/guests/{id}", method = RequestMethod.GET)
     public Guest get(@PathVariable Long id) {
         return service.get(id);
-    }
-
-    @RequestMapping(path = "/guests", method = RequestMethod.POST)
-    public Guest save(@RequestBody Guest guest) {
-        service.save(guest);
-        return guest;
     }
 
     @RequestMapping(path = "/guests/{id}", method = RequestMethod.DELETE)
